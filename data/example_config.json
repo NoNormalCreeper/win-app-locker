@@ -2,7 +2,8 @@
     "preference": {
         "frequency": 2,
         "warning_title": "警告",
-        "warning_message": "不要玩啦！"
+        "warning_message": "不要玩啦！",
+        "mode": "kill"
     },
     "ban_list": [
         "steam.exe",
