@@ -1,9 +1,9 @@
-config_path = "../data/config.json"
+config_path = "./data/config.json"
 
 import json
 
 def read_config() -> dict:
-    with open(config_path) as f:
+    with open(config_path, encoding='utf-8') as f:
         config = json.load(f)
     return config
 
