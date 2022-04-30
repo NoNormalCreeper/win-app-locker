@@ -23,7 +23,7 @@ def kill_all_app(ban_list: list) -> list:
         cmd = f"taskkill /f /im {app}"
         run_result = run_cmd(cmd)
         for line in run_result:
-            if 'SUCCESS' in run_cmd(cmd):
+            if 'SUCCESS' in line:
                 win32api.MessageBox(0, warning_message, warning_title, win32con.MB_ICONWARNING)
                 killed_apps.append(app)
     return killed_apps if killed_apps else None
