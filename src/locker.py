@@ -26,4 +26,5 @@ def kill_all_app(ban_list: list) -> list:
             if 'SUCCESS' in line:
                 win32api.MessageBox(0, warning_message, warning_title, win32con.MB_ICONWARNING)
                 killed_apps.append(app)
+                break
     return killed_apps if killed_apps else None
