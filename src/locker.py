@@ -10,8 +10,8 @@ def run_cmd(cmd: str) -> list:
     """
     Runs a command in the background and returns the output.
     """
-    p = subprocess.Popen(cmd, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    return p.stdout.readlines()
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
+    return p.communicate()[0].decode('utf-8').split('\n')
 
 def kill_all_app(ban_list: list) -> list:
     """
@@ -21,7 +21,9 @@ def kill_all_app(ban_list: list) -> list:
     killed_apps = []
     for app in ban_list:
         cmd = f"taskkill /f /im {app}"
-        if 'SUCCESS' in run_cmd(cmd):
-            win32api.MessageBox(0, warning_message, warning_title, win32con.MB_ICONWARNING)
-            killed_apps.append(app)
+        run_result = run_cmd(cmd)
+        for line in run_result:
+            if 'SUCCESS' in run_cmd(cmd):
+                win32api.MessageBox(0, warning_message, warning_title, win32con.MB_ICONWARNING)
+                killed_apps.append(app)
     return killed_apps if killed_apps else None
