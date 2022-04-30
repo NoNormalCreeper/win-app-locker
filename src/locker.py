@@ -34,7 +34,7 @@ async def kill_all_app(ban_list: list) -> None:
         run_result = run_cmd(cmd)
         for line in run_result:
             if 'SUCCESS' in line:
-                asyncio.get_running_loop().run_in_executor(ThreadPoolExecutor(5), partial(show_warning_box, message=warning_message, title=warning_title))
+                asyncio.get_running_loop().run_in_executor(None, partial(show_warning_box, message=warning_message, title=warning_title))
                 break
     if killed_apps:
         log(f'Successfully killed {killed_apps}')
