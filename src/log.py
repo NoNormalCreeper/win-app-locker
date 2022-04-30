@@ -14,17 +14,20 @@ logging.basicConfig(level=logging.INFO #设置日志输出格式
                     ,datefmt="%Y-%m-%d %H:%M:%S" #时间输出的格式
                     )
 
-def log(msg: str, level: str) -> None:
+def log(msg: str, level: str='info', is_exception: bool=False) -> None:
     """
     Logs a message
     """
-    if level == 'info':
-        logging.info(msg)
-    elif level == 'warning':
-        logging.warning(msg)
-    elif level == 'error':
-        logging.error(msg)
-    elif level == 'critical':
-        logging.critical(msg)
+    if is_exception:
+        logging.exception(msg)
     else:
-        logging.info(msg)
+        if level == 'info':
+            logging.info(msg)
+        elif level == 'warning':
+            logging.warning(msg)
+        elif level == 'error':
+            logging.error(msg)
+        elif level == 'critical':
+            logging.critical(msg)
+        else:
+            logging.info(msg)

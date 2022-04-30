@@ -8,10 +8,13 @@ try:
     ban_list = read_banlist()
 
     while True:
-        resp = kill_all_app(ban_list)
-        if resp:
-            log(f'Successfully killed {resp}', 'info')
-        sleep(frequency)
+        try:
+            resp = kill_all_app(ban_list)
+            if resp:
+                log(f'Successfully killed {resp}')
+            sleep(frequency)
+        except Exception as e:
+            log(str(e), is_exception=True)
 
 except Exception as e:
-    log(str(e), 'error')
+    log(str(e), is_exception=True)
