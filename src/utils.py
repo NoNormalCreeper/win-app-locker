@@ -16,7 +16,7 @@ def read_config() -> dict:
 
 def read_banlist() -> list:
     config = read_config()
-    return config['banlist']
+    return config['ban_list']
 
 def read_preference() -> dict:
     config = read_config()
