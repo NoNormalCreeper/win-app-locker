@@ -1,4 +1,5 @@
 config_path = "./data/config.json"
+banlist_txt_path = "./data/banlist.txt"
 
 import os
 import json
@@ -21,7 +22,24 @@ def read_config() -> dict:
             
 def read_banlist() -> list:
     config = read_config()
-    return config['ban_list']
+    preference = read_preference()
+    if preference['read_banlist_mode'] == 'json':
+        log(f'Read banlist from {config_path}')
+        return config['ban_list']
+    elif preference['read_banlist_mode'] == 'txt':
+        try:
+            with open(banlist_txt_path, encoding='utf-8') as f:
+                result = [line.strip() for line in f.readlines()]
+                log(f'Read banlist from {banlist_txt_path}')
+        except:
+            with open(banlist_txt_path+'.example', encoding='utf-8') as df:
+                with open(banlist_txt_path, 'w', encoding='utf-8') as f:
+                    text = df.read()
+                    f.write(text)
+                    result = [line.strip() for line in df.readlines()]
+                log(f'{banlist_txt_path} not found, created a new one.', 'warning')
+        finally:
+            return result
 
 def read_preference() -> dict:
     config = read_config()

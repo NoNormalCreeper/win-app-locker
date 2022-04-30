@@ -1,4 +1,5 @@
 **/config.json
+**/banlist.txt
 **/pycache/**
 **/*.pyc
 **.log

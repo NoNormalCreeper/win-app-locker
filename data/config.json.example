@@ -3,7 +3,8 @@
         "frequency": 2,
         "warning_title": "警告",
         "warning_message": "不要玩啦！",
-        "mode": "kill"
+        "mode": "kill",
+        "read_banlist_mode": "json"
     },
     "ban_list": [
         "steam.exe",
