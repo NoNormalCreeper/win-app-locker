@@ -1,7 +1,7 @@
 try:
+    from src.log import log
     from src.utils import read_preference, read_banlist
     from src.locker import kill_all_app
-    from src.log import log
     from time import sleep
 
     frequency = read_preference()['frequency']
