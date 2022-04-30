@@ -1,10 +1,20 @@
 from .utils import read_banlist, read_preference
+from .log import log
 import win32api, win32con, subprocess
+from concurrent.futures import ThreadPoolExecutor
+from functools import partial
+import asyncio
 
 preferences = read_preference()
 ban_list = read_banlist()
 warning_title = preferences['warning_title']
 warning_message = preferences['warning_message']
+
+def show_warning_box(message: str, title: str) -> None:
+    """
+    Shows a warning box
+    """
+    win32api.MessageBox(0, message, title, win32con.MB_ICONWARNING)
 
 def run_cmd(cmd: str) -> list:
     """
@@ -13,7 +23,7 @@ def run_cmd(cmd: str) -> list:
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
     return p.communicate()[0].decode('utf-8').split('\n')
 
-def kill_all_app(ban_list: list) -> list:
+async def kill_all_app(ban_list: list) -> None:
     """
     Kills all programs in the banlist
     Returns a list of killed apps
@@ -24,7 +34,7 @@ def kill_all_app(ban_list: list) -> list:
         run_result = run_cmd(cmd)
         for line in run_result:
             if 'SUCCESS' in line:
-                win32api.MessageBox(0, warning_message, warning_title, win32con.MB_ICONWARNING)
-                killed_apps.append(app)
+                asyncio.get_running_loop().run_in_executor(ThreadPoolExecutor(5), partial(show_warning_box, message=warning_message, title=warning_title))
                 break
-    return killed_apps if killed_apps else None
+    if killed_apps:
+        log(f'Successfully killed {killed_apps}')
