@@ -7,10 +7,10 @@ def get_datetime() -> str:
     """
     return datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 
-logging.basicConfig(
-                    filename=f'./data/logs/{get_datetime()}.log'
-                    ,format="%(asctime)s - %(name)s %(levelname)-9s - %(filename)-8s : %(lineno)s line - %(message)s"
-                    ,datefmt="%Y-%m-%d %H:%M:%S"
+logging.basicConfig(level=logging.INFO,
+                    filename=f'./data/logs/{get_datetime()}.log',
+                    format="%(asctime)s - %(name)s %(levelname)-9s - %(filename)-8s : %(lineno)s line - %(message)s",
+                    datefmt="%Y-%m-%d %H:%M:%S"
                     )
 
 def log(msg: str, level: str='info', is_exception: bool=False) -> None:
