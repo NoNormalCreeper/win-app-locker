@@ -3,3 +3,4 @@
 **/pycache/**
 **/*.pyc
 **.log
+.vscode/**

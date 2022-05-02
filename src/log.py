@@ -7,8 +7,8 @@ def get_datetime() -> str:
     """
     return datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 
-logging.basicConfig(level=logging.INFO #设置日志输出格式
-                    ,filename=f'./data/logs/{get_datetime()}.log'
+logging.basicConfig(
+                    filename=f'./data/logs/{get_datetime()}.log'
                     ,format="%(asctime)s - %(name)s %(levelname)-9s - %(filename)-8s : %(lineno)s line - %(message)s"
                     ,datefmt="%Y-%m-%d %H:%M:%S"
                     )
