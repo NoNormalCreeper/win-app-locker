@@ -9,7 +9,7 @@ def get_datetime() -> str:
 
 logging.basicConfig(level=logging.INFO,
                     filename=f'./data/logs/{get_datetime()}.log',
-                    format="%(asctime)s - %(name)s %(levelname)-9s - %(filename)-8s : %(lineno)s line - %(message)s",
+                    format="%(asctime)s - %(name)s %(levelname)-9s - %(message)s",
                     datefmt="%Y-%m-%d %H:%M:%S"
                     )
 
