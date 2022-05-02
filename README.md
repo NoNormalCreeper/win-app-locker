@@ -22,7 +22,7 @@ Then this is the app for you!
 Locate to the project folder and run the following command to start the app in the background.
 
 ```shell
-pythonw main.py
+pythonw main.pyw
 ```
 
 #### Kill
