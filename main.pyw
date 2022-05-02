@@ -10,7 +10,7 @@ try:
 
     while True:
         try:
-            asyncio.run(kill_all_app(ban_list))
+            asyncio.get_event_loop().run_until_complete(kill_all_app(ban_list))
             sleep(frequency)
         except Exception as e:
             log(str(e), is_exception=True)
