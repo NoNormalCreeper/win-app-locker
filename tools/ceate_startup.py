@@ -6,7 +6,7 @@ import sys
 
 bat_file_name = 'startuppyw.bat'
 
-startup_dir = "C:\\Users\\" + os.getlogin() + "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"
+startup_dir = f"C:\\Users\\{os.getlogin()}\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"
 
 fixed_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 mainfile_path = os.path.join(fixed_path, 'main.pyw')

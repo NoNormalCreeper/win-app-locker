@@ -4,7 +4,7 @@
         "warning_title": "警告",
         "warning_message": "不要玩啦！",
         "mode": "kill",
-        "read_banlist_mode": "json"
+        "read_banlist_mode": "txt"
     },
     "ban_list": [
         "steam.exe",
