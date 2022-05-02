@@ -4,6 +4,7 @@ banlist_txt_path = "./data/banlist.txt"
 import os
 import json
 from src.log import log
+from functools import cached_property
 
 def read_config() -> dict:
     try:
@@ -19,10 +20,28 @@ def read_config() -> dict:
     finally:
         log(f'Read config from {config_path}:\n{config}')
         return config
-            
+
+class Config:
+    def __init__(self):
+        self.config = read_config()
+    
+    @cached_property
+    def config(self) -> dict:
+        return read_config()
+    
+    @cached_property
+    def preference(self) -> dict:
+        return read_preference()
+    
+    @cached_property
+    def ban_list(self) -> list:
+        return read_banlist()
+
+config = Config()
+
+
 def read_banlist() -> list:
-    config = read_config()
-    preference = read_preference()
+    preference = config.preference
     if preference['read_banlist_mode'] == 'json':
         log(f'Read banlist from {config_path}')
         return config['ban_list']
@@ -39,8 +58,8 @@ def read_banlist() -> list:
                     result = [line.strip() for line in df.readlines()]
                 log(f'{banlist_txt_path} not found, created a new one.', 'warning')
         finally:
+            log(f'Banlist:\n{result}')
             return result
 
 def read_preference() -> dict:
-    config = read_config()
-    return config['preference']
+    return config.config['preference']

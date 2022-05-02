@@ -1,12 +1,14 @@
-from .utils import read_banlist, read_preference
+from distutils.command.config import config
+from .utils import config
 from .log import log
 import win32api, win32con, subprocess
 from concurrent.futures import ThreadPoolExecutor
 from functools import partial
 import asyncio
 
-preferences = read_preference()
-ban_list = read_banlist()
+# config = read_config()
+preferences = config.preference
+ban_list = config.preference
 warning_title = preferences['warning_title']
 warning_message = preferences['warning_message']
 
