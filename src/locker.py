@@ -14,7 +14,16 @@ def show_warning_box(message: str, title: str) -> None:
     """
     Shows a warning box
     """
-    win32api.MessageBox(0, message, title, win32con.MB_ICONWARNING)
+    # win32api.MessageBox(0, message, title, win32con.MB_ICONWARNING)
+    asyncio.get_running_loop().run_in_executor(None, partial(
+        win32api.MessageBox, 0, message, title, win32con.MB_ICONWARNING))
+
+async def show_error_box(message: str, title: str) -> None:
+    """
+    Shows an error box
+    """
+    asyncio.get_running_loop().run_in_executor(None, partial(
+        win32api.MessageBox, 0, message, title, win32con.MB_ICONERROR))
 
 def run_cmd(cmd: str) -> list:
     """
@@ -35,7 +44,7 @@ async def kill_all_app(ban_list: list) -> None:
         for line in run_result:
             if 'SUCCESS' in line:
                 killed_apps.append(app)
-                asyncio.get_running_loop().run_in_executor(None, partial(show_warning_box, message=warning_message, title=warning_title))
+                show_warning_box(warning_message, warning_title)
                 break
     if killed_apps:
         log(f'Successfully killed {killed_apps}')
