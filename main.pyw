@@ -5,12 +5,15 @@ try:
     from src.locker import show_error_box, kill_all_app
     from time import sleep
 
-    # config = read_config()
     frequency = config.preference['frequency']
     ban_list = config.ban_list
     
+    flag = 1
     while True:
         try:
+            if flag:
+                log('====Started locker.====')
+                flag = 0
             asyncio.get_event_loop().run_until_complete(kill_all_app(ban_list))
             sleep(frequency)
         except Exception as e:

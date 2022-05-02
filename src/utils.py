@@ -6,6 +6,7 @@ import json
 from src.log import log
 from functools import cached_property
 
+
 def read_config() -> dict:
     try:
         with open(config_path, encoding='utf-8') as f:
@@ -43,23 +44,23 @@ config = Config()
 def read_banlist() -> list:
     preference = config.preference
     if preference['read_banlist_mode'] == 'json':
-        log(f'Read banlist from {config_path}')
-        return config['ban_list']
+        ban_list = config.config['ban_list']
+        source = config_path
     elif preference['read_banlist_mode'] == 'txt':
         try:
             with open(banlist_txt_path, encoding='utf-8') as f:
-                result = [line.strip() for line in f.readlines()]
-                log(f'Read banlist from {banlist_txt_path}')
+                ban_list = [line.strip() for line in f.readlines()]
         except:
             with open(banlist_txt_path+'.example', encoding='utf-8') as df:
                 with open(banlist_txt_path, 'w', encoding='utf-8') as f:
                     text = df.read()
                     f.write(text)
-                    result = [line.strip() for line in df.readlines()]
+                    ban_list = [line.strip() for line in df.readlines()]
                 log(f'{banlist_txt_path} not found, created a new one.', 'warning')
         finally:
-            log(f'Banlist:\n{result}')
-            return result
+            source = banlist_txt_path
+            log(f'Read banlist from {source}:\n{ban_list}')
+            return ban_list
 
 def read_preference() -> dict:
     return config.config['preference']
