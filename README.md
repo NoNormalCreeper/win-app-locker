@@ -25,6 +25,8 @@ Locate to the project folder and run the following command to start the app in t
 pythonw main.pyw
 ```
 
+More easy to use, you can double click `tools/start.bat` to start the app.
+
 #### Kill
 
 Find `python.exe` or `pythonw.exe` in Task Manager and kill it.
@@ -34,6 +36,8 @@ Using `taskkill` command can be faster.
 ```shell
 taskkill /f /im pythonw.exe
 ```
+
+More easy to use, you can double click `tools/stop.bat` to kill the app.
 
 #### Start with Windows
 
