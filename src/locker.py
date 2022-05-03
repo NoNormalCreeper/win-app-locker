@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 from functools import partial
 import asyncio
 
-# config = read_config()
+
 preferences = config.preference
 ban_list = config.preference
 warning_title = preferences['warning_title']
@@ -16,7 +16,6 @@ def show_warning_box(message: str, title: str) -> None:
     """
     Shows a warning box
     """
-    # win32api.MessageBox(0, message, title, win32con.MB_ICONWARNING)
     asyncio.get_running_loop().run_in_executor(None, partial(
         win32api.MessageBox, 0, message, title, win32con.MB_ICONWARNING))
 
