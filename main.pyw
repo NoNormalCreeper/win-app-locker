@@ -6,6 +6,7 @@ try:
     from time import sleep
 
     frequency = config.preference['frequency']
+    mode = config.preference['mode']
     ban_list = config.ban_list
     
     flag = 1
@@ -14,7 +15,15 @@ try:
             if flag:
                 log('====Started locker.====')
                 flag = 0
-            asyncio.get_event_loop().run_until_complete(kill_all_app(ban_list))
+            if mode == 'kill':
+                asyncio.get_event_loop().run_until_complete(kill_all_app(ban_list))
+            elif mode == 'lock':
+                # TODO: Implement lock mode
+                pass
+            # elif mode == ...
+            # ......
+            else:
+                log(f'Mode "{mode}" is not supported.', 'error')
             sleep(frequency)
         except Exception as e:
             log(str(e), is_exception=True)
