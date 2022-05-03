@@ -1,5 +1,6 @@
 import logging
 import datetime
+import os
 
 def get_datetime() -> str:
     """
@@ -7,11 +8,16 @@ def get_datetime() -> str:
     """
     return datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 
-logging.basicConfig(level=logging.INFO,
-                    filename=f'./data/logs/{get_datetime()}.log',
-                    format="%(asctime)s - %(name)s %(levelname)-9s - %(message)s",
-                    datefmt="%Y-%m-%d %H:%M:%S"
-                    )
+try:
+    os.mkdir('./data/logs')
+except FileExistsError:
+    pass
+finally:
+    logging.basicConfig(level=logging.INFO,
+                        filename=f'./data/logs/{get_datetime()}.log',
+                        format="%(asctime)s - %(name)s %(levelname)-9s - %(message)s",
+                        datefmt="%Y-%m-%d %H:%M:%S"
+                        )
 
 def log(msg: str, level: str='info', is_exception: bool=False) -> None:
     """
