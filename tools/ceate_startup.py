@@ -1,6 +1,7 @@
 """
 Let Windows run main.pyw with Windows startup.
 """
+
 import os
 import sys
 
@@ -11,8 +12,7 @@ startup_dir = f"C:\\Users\\{os.getlogin()}\\AppData\\Roaming\\Microsoft\\Windows
 fixed_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 mainfile_path = os.path.join(fixed_path, 'main.pyw')
 
-bat_content = ""
-bat_content += "@echo off\n"
+bat_content = "" + "@echo off\n"
 bat_content += "pythonw {mainfile_path}\n"
 
 with open(os.path.join(startup_dir, bat_file_name), 'w', encoding='utf-8') as f:
