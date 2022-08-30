@@ -13,7 +13,7 @@ def read_config() -> dict:
             config = json.load(f)
     except FileNotFoundError:
         # copy example_config.json
-        with open(config_path+'.example', encoding='utf-8')as f:
+        with open(f'{config_path}.example', encoding='utf-8') as f:
             config = json.load(f)
         with open(config_path, 'w', encoding='utf-8') as f:
             json.dump(config, f, ensure_ascii=False, indent=4)
@@ -51,7 +51,7 @@ def read_banlist() -> list:
             with open(banlist_txt_path, encoding='utf-8') as f:
                 ban_list = [line.strip() for line in f.readlines()]
         except:
-            with open(banlist_txt_path+'.example', encoding='utf-8') as df:
+            with open(f'{banlist_txt_path}.example', encoding='utf-8') as df:
                 with open(banlist_txt_path, 'w', encoding='utf-8') as f:
                     text = df.read()
                     f.write(text)

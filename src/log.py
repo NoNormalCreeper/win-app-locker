@@ -25,14 +25,11 @@ def log(msg: str, level: str='info', is_exception: bool=False) -> None:
     """
     if is_exception:
         logging.exception(msg)
+    elif level == 'critical':
+        logging.critical(msg)
+    elif level == 'error':
+        logging.error(msg)
+    elif level == 'warning':
+        logging.warning(msg)
     else:
-        if level == 'info':
-            logging.info(msg)
-        elif level == 'warning':
-            logging.warning(msg)
-        elif level == 'error':
-            logging.error(msg)
-        elif level == 'critical':
-            logging.critical(msg)
-        else:
-            logging.info(msg)
+        logging.info(msg)
